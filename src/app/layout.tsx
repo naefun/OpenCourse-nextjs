@@ -19,10 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <NavigationBar />
-        <div className="mx-[20%] my-20">
-          {children}
+        <div className="my-20 px-10 flex flex-col items-center">
+          <div className="max-w-[1400px] w-full">{children}</div>
         </div>
-
       </body>
     </html>
   );
