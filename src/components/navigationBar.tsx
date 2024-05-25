@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import CreateCourseDialog from "./CreateCourseDialog";
 import { Input } from "./ui/input";
 
 const NavigationBar = () => {
@@ -14,7 +14,7 @@ const NavigationBar = () => {
           <Link href={"/courses"}>Courses</Link>
         </div>
         <Input type="text" placeholder="Search" />
-        <Button>+ Create course</Button>
+        <CreateCourseDialog />
       </div>
       <div className="h-10 w-10 rounded-full bg-pink-200"></div>
     </div>
