@@ -28,7 +28,7 @@ const UnitItem = () => {
               setShowLessons(!showLessons);
             }}
           >
-            Show lessons
+            {showLessons ? "Hide lessons" : "Show lessons"}
           </div>
         </div>
       </CardHeader>
