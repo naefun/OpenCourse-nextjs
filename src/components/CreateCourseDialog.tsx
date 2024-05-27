@@ -65,7 +65,7 @@ const CreateCourseDialog = () => {
                   <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Name your baby" {...field} />
+                      <Input placeholder="Name your course" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
