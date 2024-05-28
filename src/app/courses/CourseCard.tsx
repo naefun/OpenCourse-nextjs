@@ -7,9 +7,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Course } from "@prisma/client";
+
 import Link from "next/link";
 
-const CourseCard = ({ description = "Some description for a course" }) => {
+const CourseCard = ({
+  id,
+  createdAt,
+  updatedAt,
+  title,
+  description = "",
+  public: isPublic,
+}: Course) => {
   return (
     <Link href={"/course"}>
       <Card
@@ -19,7 +28,7 @@ const CourseCard = ({ description = "Some description for a course" }) => {
         }}
       >
         <CardHeader>
-          <CardTitle>Course title</CardTitle>
+          <CardTitle>{title}</CardTitle>
           <div className="flex flex-row gap-2 flex-wrap">
             <Badge variant={"secondary"}>React</Badge>
             <Badge variant={"secondary"}>React</Badge>

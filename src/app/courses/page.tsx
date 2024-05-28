@@ -1,13 +1,27 @@
+import { PrismaClient } from "@prisma/client";
 import CourseCard from "./CourseCard";
 
-const Courses = () => {
+const prisma = new PrismaClient();
+
+const Courses = async () => {
+  const data = await prisma.course.findMany();
+  console.log(data);
+  prisma.$disconnect();
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-4 gap-4">
-      <CourseCard />
-      <CourseCard />
-      <CourseCard />
-      <CourseCard />
-      <CourseCard />
+      {data.map((course) => {
+        return (
+          <CourseCard
+            id={course.id}
+            createdAt={course.createdAt}
+            updatedAt={course.updatedAt}
+            title={course.title}
+            description={course.description}
+            public={course.public}
+          />
+        );
+      })}
     </div>
   );
 };
