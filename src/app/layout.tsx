@@ -1,7 +1,8 @@
+import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
+import NavigationBar from "@/components/navigationBar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NavigationBar from "@/components/navigationBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,13 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
-        <NavigationBar />
-        <div className="my-20 px-10 flex flex-col items-center">
-          <div className="max-w-[1400px] w-full">{children}</div>
-        </div>
-      </body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang="en">
+        <body className={`${inter.className}`}>
+          <NavigationBar />
+          <div className="my-20 px-10 flex flex-col items-center">
+            <div className="max-w-[1400px] w-full">{children}</div>
+          </div>
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }

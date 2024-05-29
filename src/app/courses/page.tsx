@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Course, PrismaClient } from "@prisma/client";
 import CourseCard from "./CourseCard";
 
 const prisma = new PrismaClient();
@@ -10,17 +10,8 @@ const Courses = async () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-4 gap-4">
-      {data.map((course) => {
-        return (
-          <CourseCard
-            id={course.id}
-            createdAt={course.createdAt}
-            updatedAt={course.updatedAt}
-            title={course.title}
-            description={course.description}
-            public={course.public}
-          />
-        );
+      {data.map((course: Course) => {
+        return <CourseCard key={course.id} props={{ course: course }} />;
       })}
     </div>
   );

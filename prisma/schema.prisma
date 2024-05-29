@@ -20,12 +20,12 @@ model Course {
   title         String   @db.VarChar(255)
   description   String?
   public        Boolean  @default(false)
-  units         Unit[]
+  units         Unit[]   @relation("CourseUnits")
 }
 
 model Unit {
   id            Int      @id @default(autoincrement())
-  course        Course   @relation(fields: [courseId], references: [id])
+  course        Course   @relation(fields: [courseId], references: [id], name: "CourseUnits")
   courseId      Int
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt

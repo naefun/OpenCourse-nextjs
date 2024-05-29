@@ -3,10 +3,30 @@ import { NextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
-export const GET = async () => {
-  const allCourses = await prisma.course.findMany();
+export const GET = async (request: NextRequest) => {
+  let response;
 
-  return Response.json(allCourses);
+  if (request.nextUrl.searchParams.get("id") != null) {
+    const id = parseInt(request.nextUrl.searchParams.get("id")!);
+    console.log(id);
+
+    response = await prisma.course.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        units: {
+          include: {
+            lessons: true,
+          },
+        },
+      },
+    });
+  } else {
+    response = await prisma.course.findMany();
+  }
+
+  return Response.json(response);
 };
 
 export const POST = async (req: NextRequest) => {

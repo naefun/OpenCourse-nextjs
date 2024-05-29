@@ -11,16 +11,9 @@ import { Course } from "@prisma/client";
 
 import Link from "next/link";
 
-const CourseCard = ({
-  id,
-  createdAt,
-  updatedAt,
-  title,
-  description = "",
-  public: isPublic,
-}: Course) => {
+const CourseCard = ({ props }: { props: { course: Course } }) => {
   return (
-    <Link href={"/course"}>
+    <Link href={`/course/${props.course.id}`}>
       <Card
         className="h-[20rem] hover:bg-stone-50"
         onClick={() => {
@@ -28,7 +21,7 @@ const CourseCard = ({
         }}
       >
         <CardHeader>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle>{props.course.title}</CardTitle>
           <div className="flex flex-row gap-2 flex-wrap">
             <Badge variant={"secondary"}>React</Badge>
             <Badge variant={"secondary"}>React</Badge>
@@ -36,7 +29,7 @@ const CourseCard = ({
           </div>
         </CardHeader>
         <CardContent>
-          <CardDescription>{description}</CardDescription>
+          <CardDescription>{props.course.description}</CardDescription>
         </CardContent>
       </Card>
     </Link>
