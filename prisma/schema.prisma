@@ -20,4 +20,29 @@ model Course {
   title         String   @db.VarChar(255)
   description   String?
   public        Boolean  @default(false)
+  units         Unit[]
+}
+
+model Unit {
+  id            Int      @id @default(autoincrement())
+  course        Course   @relation(fields: [courseId], references: [id])
+  courseId      Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  title         String   @db.VarChar(255)
+  description   String?
+  public        Boolean  @default(false)
+  lessons       Lesson[]
+}
+
+model Lesson {
+  id            Int      @id @default(autoincrement())
+  unit          Unit     @relation(fields: [unitId], references: [id])
+  unitId        Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  title         String   @db.VarChar(255)
+  description   String?
+  videoId       String?
+  public        Boolean  @default(false)
 }
