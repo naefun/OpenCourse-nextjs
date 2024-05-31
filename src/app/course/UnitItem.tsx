@@ -58,7 +58,7 @@ const UnitItem = ({ props }: { props: { unit: Unit } }) => {
 const UnitLessonItem = ({ props }: { props: { lesson: Lesson } }) => {
   return (
     <div className="flex flex-row gap-6 hover:bg-stone-50 p-2 rounded-md">
-      <Link href={"/lesson"}>
+      <Link href={`/lesson/${props.lesson.id}`}>
         <h2 className="font-medium text-stone-700 hover:underline">
           {props.lesson.title}
         </h2>

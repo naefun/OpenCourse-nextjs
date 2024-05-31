@@ -2,7 +2,7 @@
 
 import YouTube from "react-youtube";
 
-const YoutubePlayer = ({ videoId = "2g811Eo7K8U" }) => {
+const YoutubePlayer = ({ videoId = "" }) => {
   const opts = {
     height: "100%",
     width: "100%",
