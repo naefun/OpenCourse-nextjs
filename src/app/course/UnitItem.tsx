@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import CreateLessonDialog from "@/components/CreateLessonDialog";
 import {
   Card,
   CardContent,
@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Lesson, Unit } from "@prisma/client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import UnitLessonItem from "./UnitLessonItem";
 
 const UnitItem = ({ props }: { props: { unit: Unit } }) => {
   const [showLessons, setShowLessons] = useState(false);
@@ -23,7 +23,7 @@ const UnitItem = ({ props }: { props: { unit: Unit } }) => {
       <CardHeader>
         <div className="flex flex-row justify-between">
           <CardTitle className="text-xl">{props.unit.title}</CardTitle>
-          <Button variant={"ghost"}>Add lesson</Button>
+          <CreateLessonDialog props={{ unitId: props.unit.id }} />
         </div>
         <CardDescription className="mt-2">
           {props.unit.description}
@@ -52,19 +52,6 @@ const UnitItem = ({ props }: { props: { unit: Unit } }) => {
         </CardContent>
       )}
     </Card>
-  );
-};
-
-const UnitLessonItem = ({ props }: { props: { lesson: Lesson } }) => {
-  return (
-    <div className="flex flex-row gap-6 hover:bg-stone-50 p-2 rounded-md">
-      <Link href={`/lesson/${props.lesson.id}`}>
-        <h2 className="font-medium text-stone-700 hover:underline">
-          {props.lesson.title}
-        </h2>
-      </Link>
-      <p className="text-stone-500">{props.lesson.description}</p>
-    </div>
   );
 };
 

@@ -1,41 +1,33 @@
-"use client";
-
 import BackButton from "@/components/BackButton";
-import { Button } from "@/components/ui/button";
-import { Unit } from "@prisma/client";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import CreateUnitDialog from "@/components/CreateUnitDialog";
+import { PrismaClient, Unit } from "@prisma/client";
 import UnitItem from "../UnitItem";
 
-const Course = ({ params }: { params: { id: string } }) => {
-  const { isPending, error, data } = useQuery({
-    queryKey: ["courseData" + params.id],
-    queryFn: () =>
-      fetch(`/api/courses/?id=${params.id}`).then((res) => res.json()),
+const prisma = new PrismaClient();
+
+const Course = async ({ params }: { params: { id: string } }) => {
+  const data = await prisma.course.findUnique({
+    where: {
+      id: Number(params.id),
+    },
+    include: {
+      units: {
+        include: {
+          lessons: true,
+        },
+      },
+    },
   });
-
-  useEffect(() => {
-    console.log(data);
-    console.log(params.id);
-  }, [data]);
-
-  if (isPending) {
-    return <>Loading...</>;
-  }
-
-  if (error) {
-    return <>Error {error.message}</>;
-  }
 
   return (
     <div className="">
       <BackButton />
-      <h1 className="text-2xl font-medium text-stone-700">{data.title}</h1>
+      <h1 className="text-2xl font-medium text-stone-700">{data!.title}</h1>
       <div className="flex flex-row w-full justify-end">
-        <Button onClick={() => {}}>+ Add unit</Button>
+        <CreateUnitDialog props={{ courseId: data!.id! }} />
       </div>
       <div className="flex flex-col mt-8 gap-4">
-        {data.units.map((unit: Unit) => {
+        {data!.units.map((unit: Unit) => {
           return <UnitItem key={unit.id} props={{ unit: unit }} />;
         })}
       </div>
