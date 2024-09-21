@@ -22,6 +22,23 @@ export const GET = async (request: NextRequest) => {
   return Response.json(response);
 };
 
+export const DELETE = async (request: NextRequest) => {
+  let response;
+
+  if (request.nextUrl.searchParams.get("id") != null) {
+    const id = parseInt(request.nextUrl.searchParams.get("id")!);
+    console.log(id);
+
+    response = await prisma.lesson.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
+
+  return Response.json(response);
+};
+
 export const POST = async (req: NextRequest) => {
   const {
     title,
