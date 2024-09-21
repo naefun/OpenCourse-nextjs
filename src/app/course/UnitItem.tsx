@@ -43,6 +43,9 @@ const UnitItem = ({ props }: { props: { unit: Unit } }) => {
         <CardContent>
           <div className="w-full h-[1px] bg-stone-200"></div>
           <div className="flex flex-col gap-2 mt-6">
+            {props.unit["lessons"].length === 0 && (
+              <p className="text-stone-400 text-sm">No lessons added</p>
+            )}
             {props.unit["lessons"].map((lesson: Lesson) => {
               return (
                 <UnitLessonItem key={lesson.id} props={{ lesson: lesson }} />
