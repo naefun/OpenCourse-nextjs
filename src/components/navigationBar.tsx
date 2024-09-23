@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CreateCourseDialog from "./CreateCourseDialog";
 import { Input } from "./ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const NavigationBar = () => {
   return (
@@ -16,7 +17,10 @@ const NavigationBar = () => {
         <Input type="text" placeholder="Search" />
         <CreateCourseDialog />
       </div>
-      <div className="h-10 w-10 rounded-full bg-pink-200"></div>
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
     </div>
   );
 };
