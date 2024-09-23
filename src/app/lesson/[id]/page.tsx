@@ -31,9 +31,9 @@ const Lesson = async ({ params }: { params: { id: string } }) => {
       <Title label={courseData?.title} />
       <p>{unitData?.title}</p>
       {/* Video player */}
-      <div className="w-full h-full h-[80vh] mt-10">
-        <YoutubePlayer videoId={lessonData?.videoId!} />
-      </div>
+
+      <YoutubePlayer videoId={lessonData?.videoId!} />
+
       <Subtitle label={lessonData?.title} className="mt-4" />
       <p className="text-stone-400">{lessonData?.description}</p>
     </div>
