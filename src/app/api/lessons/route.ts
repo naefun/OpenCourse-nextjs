@@ -34,6 +34,13 @@ export const DELETE = async (request: NextRequest) => {
         id: id,
       },
     });
+  } else if (request.nextUrl.searchParams.get("unitId") != null) {
+    const unitId = parseInt(request.nextUrl.searchParams.get("unitId")!);
+    response = await prisma.lesson.deleteMany({
+      where: {
+        unitId: unitId,
+      },
+    });
   }
 
   return Response.json(response);

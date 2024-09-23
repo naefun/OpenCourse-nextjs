@@ -113,7 +113,7 @@ const CreateLessonDialog = ({ props }: { props: { unitId: number } }) => {
                 name="videoId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>YouTube video ID</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Provide a YouTube video ID"

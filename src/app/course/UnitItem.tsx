@@ -10,6 +10,7 @@ import {
 import { Lesson, Unit } from "@prisma/client";
 import { useEffect, useState } from "react";
 import UnitLessonItem from "./UnitLessonItem";
+import UnitDropdownMenu from "@/components/UnitDropdownMenu";
 
 const UnitItem = ({ props }: { props: { unit: Unit } }) => {
   const [showLessons, setShowLessons] = useState(false);
@@ -23,7 +24,10 @@ const UnitItem = ({ props }: { props: { unit: Unit } }) => {
       <CardHeader>
         <div className="flex flex-row justify-between">
           <CardTitle className="text-xl">{props.unit.title}</CardTitle>
-          <CreateLessonDialog props={{ unitId: props.unit.id }} />
+          <div className="flex flex-row gap-4">
+            <CreateLessonDialog props={{ unitId: props.unit.id }} />
+            <UnitDropdownMenu props={{ unit: props.unit }} />
+          </div>
         </div>
         <CardDescription className="mt-2">
           {props.unit.description}
