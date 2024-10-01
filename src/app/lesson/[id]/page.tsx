@@ -1,10 +1,10 @@
 import BackButton from "@/components/BackButton";
 import Subtitle from "@/components/Subtitle";
 import Title from "@/components/Title";
-import { PrismaClient } from "@prisma/client";
+import PrismaConnection from "@/database/PrismaConnection";
 import YoutubePlayer from "../YoutubePlayer";
 
-const prisma = new PrismaClient();
+const prisma = PrismaConnection.getInstance();
 
 const Lesson = async ({ params }: { params: { id: string } }) => {
   // get lesson

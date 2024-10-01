@@ -66,7 +66,7 @@ const CreateUnitDialog = ({ props }: { props: { courseId: number } }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>+ Add unit</Button>
+        <Button variant={"secondary"}>+ Add unit</Button>
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>

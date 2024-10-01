@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import PrismaConnection from "@/database/PrismaConnection";
 import { NextRequest } from "next/server";
 
-const prisma = new PrismaClient();
+const prisma = PrismaConnection.getInstance();
 
 export const GET = async (request: NextRequest) => {
   let response;

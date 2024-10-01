@@ -20,7 +20,7 @@ const CourseCard = ({ props }: { props: { course: Course } }) => {
           console.log("Pressed card");
         }}
       >
-        <CardHeader>
+        <CardHeader className="gap-4">
           <CardTitle>{props.course.title}</CardTitle>
           <div className="flex flex-row gap-2 flex-wrap">
             <Badge variant={"secondary"}>React</Badge>
@@ -28,7 +28,7 @@ const CourseCard = ({ props }: { props: { course: Course } }) => {
             <Badge variant={"secondary"}>React</Badge>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="mt-2">
           <CardDescription>{props.course.description}</CardDescription>
         </CardContent>
       </Card>

@@ -7,10 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import UnitDropdownMenu from "@/components/UnitDropdownMenu";
 import { Lesson, Unit } from "@prisma/client";
 import { useEffect, useState } from "react";
 import UnitLessonItem from "./UnitLessonItem";
-import UnitDropdownMenu from "@/components/UnitDropdownMenu";
 
 const UnitItem = ({ props }: { props: { unit: Unit } }) => {
   const [showLessons, setShowLessons] = useState(false);
@@ -33,14 +33,14 @@ const UnitItem = ({ props }: { props: { unit: Unit } }) => {
           {props.unit.description}
         </CardDescription>
         <div className="flex flex-row">
-          <div
+          <p
             className="text-sm hover:underline cursor-pointer flex"
             onClick={() => {
               setShowLessons(!showLessons);
             }}
           >
             {showLessons ? "Hide lessons" : "Show lessons"}
-          </div>
+          </p>
         </div>
       </CardHeader>
       {showLessons && (

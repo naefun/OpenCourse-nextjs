@@ -1,7 +1,8 @@
-import { Course, PrismaClient } from "@prisma/client";
+import PrismaConnection from "@/database/PrismaConnection";
+import { Course } from "@prisma/client";
 import CourseCard from "./CourseCard";
 
-const prisma = new PrismaClient();
+const prisma = PrismaConnection.getInstance();
 
 const Courses = async () => {
   const data = await prisma.course.findMany();

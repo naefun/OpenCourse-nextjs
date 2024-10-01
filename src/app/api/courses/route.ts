@@ -1,7 +1,8 @@
+import PrismaConnection from "@/database/PrismaConnection";
 import { PrismaClient } from "@prisma/client";
 import { NextRequest } from "next/server";
 
-const prisma = new PrismaClient();
+const prisma = PrismaConnection.getInstance();
 
 export const GET = async (request: NextRequest) => {
   let response;
@@ -24,6 +25,47 @@ export const GET = async (request: NextRequest) => {
     });
   } else {
     response = await prisma.course.findMany();
+  }
+
+  return Response.json(response);
+};
+
+export const DELETE = async (request: NextRequest) => {
+  let response;
+
+  if (request.nextUrl.searchParams.get("id") != null) {
+    const id = parseInt(request.nextUrl.searchParams.get("id")!);
+
+    // get units for the to be deleted course
+    const units = await prisma.unit.findMany({
+      where: {
+        courseId: id,
+      },
+    });
+
+    // get the unit ids
+    const unitIds = units.map((unit) => unit.id);
+
+    // delete the lessons within the to be deleted course
+    await prisma.lesson.deleteMany({
+      where: {
+        unitId: {
+          in: unitIds,
+        },
+      },
+    });
+
+    await prisma.unit.deleteMany({
+      where: {
+        courseId: id,
+      },
+    });
+
+    response = await prisma.course.delete({
+      where: {
+        id: id,
+      },
+    });
   }
 
   return Response.json(response);
