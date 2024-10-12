@@ -33,6 +33,7 @@ model Unit {
   description   String?
   public        Boolean  @default(false)
   lessons       Lesson[]
+  position      Int      @default(0)
 }
 
 model Lesson {
@@ -45,4 +46,5 @@ model Lesson {
   description   String?
   videoId       String?
   public        Boolean  @default(false)
+  position      Int      @default(0)
 }

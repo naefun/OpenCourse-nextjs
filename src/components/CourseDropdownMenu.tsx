@@ -22,7 +22,11 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-const CourseDropdownMenu = ({ props }: { props: { course: Course } }) => {
+const CourseDropdownMenu = ({
+  props,
+}: {
+  props: { course: Course; isEditing: boolean; setIsEditing: Function };
+}) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -31,6 +35,14 @@ const CourseDropdownMenu = ({ props }: { props: { course: Course } }) => {
       <DropdownMenuContent>
         <DropdownMenuLabel>{props.course.title}</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem
+          disabled={props.isEditing}
+          onSelect={() => {
+            props.setIsEditing(!props.isEditing);
+          }}
+        >
+          {props.isEditing ? "Editing" : "Edit"}
+        </DropdownMenuItem>
         <DropdownMenuItem
           className="text-red-600 focus:text-red-600 focus:bg-red-50"
           onSelect={(e) => e.preventDefault()}

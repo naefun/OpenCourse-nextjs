@@ -1,5 +1,5 @@
 import PrismaConnection from "@/database/PrismaConnection";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const prisma = PrismaConnection.getInstance();
 
@@ -22,6 +22,21 @@ export const GET = async (request: NextRequest) => {
   return Response.json(response);
 };
 
+export const PUT = async (request: NextRequest) => {
+  const data = await request.json();
+  for (let item of data) {
+    await prisma.unit.update({
+      where: {
+        id: item.id,
+      },
+      data: {
+        position: item.position,
+      },
+    });
+  }
+  return NextResponse.json({ message: data }, { status: 201 });
+};
+
 export const DELETE = async (request: NextRequest) => {
   let response;
 
@@ -42,6 +57,12 @@ export const DELETE = async (request: NextRequest) => {
 export const POST = async (req: NextRequest) => {
   const { title, description, public: isPublic, courseId } = await req.json();
 
+  const units = await prisma.unit.findMany({
+    where: {
+      courseId: courseId,
+    },
+  });
+
   try {
     const newUnit = await prisma.unit.create({
       data: {
@@ -49,6 +70,7 @@ export const POST = async (req: NextRequest) => {
         description,
         courseId,
         public: isPublic || false,
+        position: units.length,
       },
     });
 
